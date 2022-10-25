@@ -1,0 +1,67 @@
+{% extends "./base.html" %}
+{% block title %} Registro Autos {% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Ingrese Datos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registroVehiculo/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtplaca" class="form-control" placeholder="Ingrese placa" minlength="6"
+                            maxlength="6" required>
+                    
+                        <input type="date" id="txtfecha" class="form-control" placeholder="Ingrese fecha" required>
+
+                        <input type="text" id="txttipo" class="form-control" placeholder="Tipo Auto" required>
+
+                        <input type="number" id="txttotal" class="form-control" placeholder="Valor Total" required>
+
+                        <input type="number" id="txtcostos" class="form-control" placeholder="Costo arreglos" required>
+
+                        <textarea type="text" id="txtarreglos" class="form-control" placeholder="Ingrese arreglos"
+                            required>
+                        
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-8">
+        <h3>Listado de Vehiculos</h3>
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Fecha</th>
+                        <th>Tipo Auto</th>
+                        <th>Valor Total</th>
+                        <th>Costos Arreglo</th>
+                        <th>Descripcion Arreglo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {% for c in registro %}
+                        <tr>
+                            <td>{{c.placa}}</td>
+                            <td>{{c.fecha}}</td>
+                            <td>{{c.tipo_auto}}</td>
+                            <td>{{c.valor}}</td>
+                            <td>{{c.costos}}</td>
+                            <td>{{c.arreglos}}</td>
+                        </tr>
+                        {% endfor %}
+                    </ul>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
